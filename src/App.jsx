@@ -1,4 +1,5 @@
 import './App.css';
+import BudgetForm from './components/BudgetForm';
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <p>ここから開発スタート！</p>
       {/* 収支サマリー */}
       {/* 入力フォーム */}
+      <BudgetForm />
       {/* 取引履歴リスト */}
     </div>
   );
