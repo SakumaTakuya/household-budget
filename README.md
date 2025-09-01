@@ -138,7 +138,7 @@ src/
 ### コーディング規約
 - **コンポーネント名**: PascalCase（例：BudgetForm）
 - **ファイル名**: コンポーネント名と同じ
-- **CSS クラス名**: コンポーネント名と同じ
+- **CSS クラス名**: kebab-case（例：budget-form）
 - **関数名**: camelCase（例：addBudgetItem）
 
 ## 🛠️ 使用技術
