@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# 🏠 かんたん家計簿アプリ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+日々の収支を簡単に記録・管理できるWebアプリです。  
+React.js の学習を兼ねて、二人で協力して開発しています。
 
-## Available Scripts
+## 📱 機能
 
-In the project directory, you can run:
+### Phase 1（基本機能）
+- ✅ 収入・支出の入力
+- ✅ 履歴の一覧表示
+- ✅ 収支の集計表示
 
-### `npm start`
+### Phase 2（改善機能）
+- ⏳ 項目の編集・削除
+- ⏳ 表示の改善
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Phase 3（発展機能）
+- ⏳ 月別表示・フィルタ
+- ⏳ カテゴリ別グラフ
+- ⏳ カテゴリの新規作成
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 作業の流れ
 
-### `npm test`
+### 1. 現在の状況を確認
+- どのブランチにいるか確認すること
+- 変更されていないことを確認しておくこと
+  - 変更がある場合は内容を確認して必要があれば事前に push
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![](images/vscode-current-branch.png)
 
-### `npm run build`
+### 2. mainブランチに移動
+- ブランチをクリックして main に移動すること
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](images/vscode-to-main-branch.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. 最新の状態を取得
+- main を最新にしておくこと
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](images/vscode-pull-main.png)
 
-### `npm run eject`
+### 4. 新しいブランチを作成
+- 機能名をわかりやすく命名すること
+  - feataure: 機能という意味なので、新しい機能を開発するときはこの名前をつけると良い
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![](images/vscode-create-branch.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. 作業開始
+- 該当するファイルを開く
+- 小さな変更から始める
+- こまめに保存・確認
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 6. Pull Request ページに移動
+- https://github.com/SakumaTakuya/household-budget/pulls に移動
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![](images/pr-new.png)
 
-## Learn More
+### 7. Pull Request 作成
+- compare: が自分の作成したブランチであるか確認すること
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![](images/pr-create.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 8. Pull Request 詳細記入
+- わかりやすく完結にまとめること
+- AI に考えてもらっても良い
 
-### Code Splitting
+![](images/pr-detail.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## セットアップ手順
 
-### Analyzing the Bundle Size
+### 1. リポジトリのクローン
+```bash
+git clone git@github.com:SakumaTakuya/household-budget.git
+cd household-budget
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. 依存関係のインストール
+```bash
+npm install
+```
 
-### Making a Progressive Web App
+### 3. 開発サーバーの起動 (動作確認)
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ブラウザで http://localhost:3000 が自動で開きます。
 
-### Advanced Configuration
+## 📁 プロジェクト構造
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+src/
+├── components/
+│   ├── BudgetForm.jsx   ← まずここから
+│   └── BudgetForm.css   ← 見た目を整える
+├── App.jsx              ← BudgetFormを呼び出す
+└── App.css              ← 全体レイアウト
+```
 
-### Deployment
+## 🎯 開発ルール
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Git運用
+- `main`ブランチ：安定版
+- `feature/機能名`ブランチ：新機能開発
+- 機能完成後にプルリクエスト
 
-### `npm run build` fails to minify
+> [!NOTE]
+> #### なぜブランチを分けるのか？
+> 
+> **🛡️ 安全性の確保**
+> - `main`ブランチを常に「動く状態」に保つ
+> - 実験的な変更で全体を壊すリスクを回避
+> - 問題があっても`main`に戻れば安心
+> 
+> **👥 協力開発をスムーズに**
+> ```
+> あなた：feature/budget-form で入力フォーム作成中
+> 相手　：feature/item-list で履歴表示作成中
+> 　　　　↓
+> 　　 お互い邪魔せずに並行開発可能
+> 　　　　↓
+> 　　完成したものを順番にmainに統合
+> ```
+> 
+> **📝 変更履歴の整理**
+> - 「この機能はいつ、誰が、なぜ追加したか」が明確
+> - 問題が起きた時に原因を特定しやすい
+> - 機能ごとに変更をまとめられる
+> 
+> **🔄 実際の例**
+> ```
+> main: 基本の家計簿アプリ（動作する状態）
+>  ├─ feature/budget-form: フォーム改善中（作業中）
+>  ├─ feature/delete-item: 削除機能開発中（作業中）
+>  └─ feature/date-filter: 日付検索機能（完成→mainに統合）
+> ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### コーディング規約
+- **コンポーネント名**: PascalCase（例：BudgetForm）
+- **ファイル名**: コンポーネント名と同じ
+- **CSS クラス名**: kebab-case（例：budget-form）
+- **関数名**: camelCase（例：addBudgetItem）
+
+## 🛠️ 使用技術
+
+- **React.js** (18.x): UIライブラリ
+- **Lucide React**: アイコン
+- **CSS**: スタイリング
+- **localStorage**: データ保存
+
+## 🎨 デザイン方針
+
+- **シンプル**: 余計な装飾は避ける
+- **直感的**: 迷わず操作できるUI
+- **見やすい**: 収入は青、支出は赤で区別
+- **モバイル対応**: スマホでも使いやすく
+
+## 🤝 開発の進め方
+
+1. **要件確認**: 何を作るか明確にする
+2. **タスク分割**: 小さな単位に分ける
+3. **ペアプログラミング**: 一緒に画面を見ながら開発
+4. **コードレビュー**: お互いのコードを確認
+5. **テスト**: 実際に使ってみて改善点を見つける
+
+## 🆘 困った時は
+
+### よくあるトラブル
+- **エラーが出たら**: ブラウザのConsole（F12）を確認
+- **画面が真っ白**: `npm start` でサーバーが起動しているか確認
+- **変更が反映されない**: ファイル保存後、ブラウザをリロード
+
+### Git関連のトラブル
+- **ブランチが分からない**: VS Code の左下で確認
+- **マージコンフリクト**: 焦らず相談する
+- **間違えてコミット**: 一緒に対処
