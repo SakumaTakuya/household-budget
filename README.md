@@ -17,73 +17,60 @@ React.js の学習を兼ねて、二人で協力して開発しています。
 ### Phase 3（発展機能）
 - ⏳ 月別表示・フィルタ
 - ⏳ カテゴリ別グラフ
+- ⏳ カテゴリの新規作成
 
-## 🚀 タスクの開始方法
+## 🚀 作業の流れ
 
-### 新しいタスクを始める時の手順
-
-#### 1. 現在の状況を確認
-* どのブランチにいるか確認すること
-* 変更されていないことを確認しておくこと
-  * 変更がある場合は内容を確認して必要があれば事前に push
+### 1. 現在の状況を確認
+- どのブランチにいるか確認すること
+- 変更されていないことを確認しておくこと
+  - 変更がある場合は内容を確認して必要があれば事前に push
 
 ![](images/vscode-current-branch.png)
 
-#### 2. mainブランチに移動
-* ブランチをクリックして main に移動すること
+### 2. mainブランチに移動
+- ブランチをクリックして main に移動すること
 
 ![](images/vscode-to-main-branch.png)
 
-#### 3. 最新の状態を取得
-* main を最新にしておくこと
+### 3. 最新の状態を取得
+- main を最新にしておくこと
 
 ![](images/vscode-pull-main.png)
 
-#### 4. 新しいブランチを作成
-* 機能名をわかりやすく命名すること
-  * feataure: 機能という意味なので、新しい機能を開発するときはこの名前をつけると良い
+### 4. 新しいブランチを作成
+- 機能名をわかりやすく命名すること
+  - feataure: 機能という意味なので、新しい機能を開発するときはこの名前をつけると良い
 
 ![](images/vscode-create-branch.png)
 
-#### 5. 作業開始
+### 5. 作業開始
 - 該当するファイルを開く
 - 小さな変更から始める
 - こまめに保存・確認
 
-#### 6. レビュー・マージ
-- GitHub でプルリクエスト作成
-- コードレビュー
-- 問題なければmainにマージ
+### 6. Pull Request ページに移動
+- https://github.com/SakumaTakuya/household-budget/pulls に移動
 
-### タスクの種類別ガイド
+![](images/pr-new.png)
 
-#### 🎨 UI作成タスク（初心者向け）
-**例**: 収支入力フォームを作る
-1. `src/components/BudgetForm.js` を開く
-2. 基本的なJSXを書く
-3. `src/components/BudgetForm.css` でスタイリング
-4. `src/App.js` でインポートして表示確認
+### 7. Pull Request 作成
+- compare: が自分の作成したブランチであるか確認すること
 
-#### ⚙️ 機能実装タスク（協力して）
-**例**: フォームでデータを追加する
-1. UIが完成していることを確認
-2. useState でデータ管理
-3. イベントハンドラー作成
-4. 動作テスト
+![](images/pr-create.png)
 
-#### 🔧 バグ修正タスク
-**例**: 金額計算がおかしい
-1. 問題の再現
-2. ブラウザのConsoleでエラー確認
-3. 該当箇所を特定
-4. 修正・テスト
+### 8. Pull Request 詳細記入
+- わかりやすく完結にまとめること
+- AI に考えてもらっても良い
+
+![](images/pr-detail.png)
 
 ## セットアップ手順
 
 ### 1. リポジトリのクローン
 ```bash
-git clone [リポジトリURL]
-cd simple-household-budget
+git clone git@github.com:SakumaTakuya/household-budget.git
+cd household-budget
 ```
 
 ### 2. 依存関係のインストール
@@ -91,7 +78,7 @@ cd simple-household-budget
 npm install
 ```
 
-### 3. 開発サーバーの起動
+### 3. 開発サーバーの起動 (動作確認)
 ```bash
 npm start
 ```
@@ -102,22 +89,11 @@ npm start
 
 ```
 src/
-├── components/           # UIコンポーネント
-│   ├── BudgetForm.js    # 収支入力フォーム
-│   ├── BudgetForm.css
-│   ├── BudgetList.js    # 収支履歴リスト
-│   ├── BudgetList.css
-│   ├── BudgetItem.js    # 個別の収支項目
-│   ├── BudgetItem.css
-│   ├── Summary.js       # 月間収支サマリー
-│   └── Summary.css
-├── utils/               # ユーティリティ
-│   ├── constants.js     # 定数（カテゴリなど）
-│   ├── storage.js       # データ保存・読み込み
-│   └── formatters.js    # 日付・金額の表示形式
-├── hooks/               # カスタムフック
-│   └── useBudget.js     # 家計簿の状態管理
-└── App.js               # メインコンポーネント
+├── components/
+│   ├── BudgetForm.jsx   ← まずここから
+│   └── BudgetForm.css   ← 見た目を整える
+├── App.jsx              ← BudgetFormを呼び出す
+└── App.css              ← 全体レイアウト
 ```
 
 ## 🎯 開発ルール
@@ -127,57 +103,43 @@ src/
 - `feature/機能名`ブランチ：新機能開発
 - 機能完成後にプルリクエスト
 
-#### ブランチ操作
-```bash
-# 現在のブランチ確認
-git branch
+> [!NOTE]
+> #### なぜブランチを分けるのか？
+> 
+> **🛡️ 安全性の確保**
+> - `main`ブランチを常に「動く状態」に保つ
+> - 実験的な変更で全体を壊すリスクを回避
+> - 問題があっても`main`に戻れば安心
+> 
+> **👥 協力開発をスムーズに**
+> ```
+> あなた：feature/budget-form で入力フォーム作成中
+> 相手　：feature/item-list で履歴表示作成中
+> 　　　　↓
+> 　　 お互い邪魔せずに並行開発可能
+> 　　　　↓
+> 　　完成したものを順番にmainに統合
+> ```
+> 
+> **📝 変更履歴の整理**
+> - 「この機能はいつ、誰が、なぜ追加したか」が明確
+> - 問題が起きた時に原因を特定しやすい
+> - 機能ごとに変更をまとめられる
+> 
+> **🔄 実際の例**
+> ```
+> main: 基本の家計簿アプリ（動作する状態）
+>  ├─ feature/budget-form: フォーム改善中（作業中）
+>  ├─ feature/delete-item: 削除機能開発中（作業中）
+>  └─ feature/date-filter: 日付検索機能（完成→mainに統合）
+> ```
 
-# 新しいブランチを作成して切り替え
-git checkout -b feature/budget-form
-
-# 既存のブランチに切り替え
-git checkout main
-git checkout feature/budget-form
-
-# ブランチ一覧を確認
-git branch -a
-
-# リモートの最新を取得してから切り替え
-git pull origin main
-git checkout main
-```
-
-#### 基本的な作業フロー
-```bash
-# 1. mainから最新を取得
-git checkout main
-git pull origin main
-
-# 2. 新機能用ブランチ作成
-git checkout -b feature/新機能名
-
-# 3. 作業・コミット
-git add .
-git commit -m "feat: 新機能を追加"
-
-# 4. リモートにプッシュ
-git push origin feature/新機能名
-
-# 5. プルリクエスト作成（GitHub上で）
-```
 
 ### コーディング規約
 - **コンポーネント名**: PascalCase（例：BudgetForm）
 - **ファイル名**: コンポーネント名と同じ
-- **CSS クラス名**: kebab-case（例：budget-form）
+- **CSS クラス名**: コンポーネント名と同じ
 - **関数名**: camelCase（例：addBudgetItem）
-
-### コミットメッセージ
-```
-feat: 収支入力フォームを追加
-fix: 金額計算のバグを修正
-style: ボタンのデザインを改善
-```
 
 ## 🛠️ 使用技術
 
@@ -186,34 +148,12 @@ style: ボタンのデザインを改善
 - **CSS**: スタイリング
 - **localStorage**: データ保存
 
-## 📝 開発メモ
-
-### 初心者向けタスク
-1. **BudgetForm.js**: 入力フォームのUI作成
-2. **BudgetItem.js**: 個別項目の表示
-3. **CSS**: 全体的なデザイン調整
-
-### 上級者サポートタスク
-1. **useBudget.js**: 状態管理ロジック
-2. **storage.js**: データ永続化
-3. **App.js**: 全体的な構成
-
 ## 🎨 デザイン方針
 
 - **シンプル**: 余計な装飾は避ける
 - **直感的**: 迷わず操作できるUI
 - **見やすい**: 収入は青、支出は赤で区別
 - **モバイル対応**: スマホでも使いやすく
-
-## 📚 学習リソース
-
-### React基礎
-- [React公式ドキュメント](https://ja.react.dev/)
-- [useState フック](https://ja.react.dev/reference/react/useState)
-
-### CSS
-- [CSS基礎](https://developer.mozilla.org/ja/docs/Web/CSS)
-- [Flexbox ガイド](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
 ## 🤝 開発の進め方
 
@@ -231,15 +171,6 @@ style: ボタンのデザインを改善
 - **変更が反映されない**: ファイル保存後、ブラウザをリロード
 
 ### Git関連のトラブル
-- **ブランチが分からない**: `git branch` で現在位置を確認
+- **ブランチが分からない**: VS Code の左下で確認
 - **マージコンフリクト**: 焦らず相談する
-- **間違えてコミット**: `git log` で履歴確認、一緒に対処
-
-### 相談のコツ
-- **エラーメッセージをそのまま共有**
-- **何をしようとしていたか説明**
-- **画面のスクリーンショット撮影**
-
----
-
-**開発を楽しみながら、実用的なアプリを作りましょう！** 🎉
+- **間違えてコミット**: 一緒に対処
