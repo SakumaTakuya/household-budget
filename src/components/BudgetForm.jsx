@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './BudgetForm.css';
-import { addDoc, collection, } from "firebase/firestore/lite";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../Firebase";
 
 const BudgetForm = () => {

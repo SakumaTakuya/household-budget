@@ -1,4 +1,5 @@
 import './App.css';
+import BudgetConfirm from "./components/BudgetConfirm";
 import BudgetForm from './components/BudgetForm';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       {/* 収支サマリー */}
       {/* 入力フォーム */}
       <BudgetForm />
-      {/* 取引履歴リスト */}
+      <BudgetConfirm />
     </div>
   );
 }
