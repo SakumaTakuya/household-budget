@@ -12,8 +12,8 @@ const BudgetForm = () => {
   });
 
   const handleBudget = (e) => {
-    setBudget((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+    setBudget((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const createBudget = async (event) => {
     event.preventDefault();
