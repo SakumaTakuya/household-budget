@@ -24,7 +24,10 @@ const BudgetForm = () => {
       (budget.memo) === ""
     ) { alert("入力してください"); return }
     try {
-      await addDoc(collection(db, "budget"), budget);
+      await addDoc(collection(db, "budget"), {
+        ...budget,
+        money: Number(budget.money),
+      });
       alert("追加完了しました");
       setBudget({
         date: "",
