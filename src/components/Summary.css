@@ -1,0 +1,27 @@
+.summary-all {
+  display: flex;            /* 横並び */
+  justify-content: space-around; /* 均等配置（間隔を空ける） */
+  align-items: center;      /* 縦位置を中央揃え */
+  margin: 10px;
+  padding: 10px;
+  background: #f9f9f9;      /* 背景色（任意） */
+  border-radius: 8px;       /* 角を丸く（任意） */
+}
+
+.income {
+  color: rgb(17, 255, 0);
+  font-weight: bold;
+  font-size: large;
+}
+
+.expense {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+}
+
+.balance {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: large;
+}
