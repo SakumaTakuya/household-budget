@@ -17,6 +17,12 @@ const BudgetForm = () => {
 
   const createBudget = async (event) => {
     event.preventDefault();
+    if (
+      (budget.date) === "" ||
+      (budget.money) === "" ||
+      (budget.category) === "" ||
+      (budget.memo) === ""
+    ) { alert("入力してください"); return }
     try {
       await addDoc(collection(db, "budget"), budget);
       alert("追加完了しました");

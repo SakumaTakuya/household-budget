@@ -23,7 +23,7 @@ const BudgetConfirm = () => {
       {budgetList.map(budget => (
         <div key={budget.id} className="budget">
           <p>{budget.date}</p>
-          <p>{budget.money}</p>
+          <p>￥{budget.money}</p>
           <p>{budget.category}</p>
           <p>{budget.memo}</p>
         </div>
