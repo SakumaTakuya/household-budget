@@ -1,4 +1,4 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from 'react'
 import { db } from "../Firebase";
 import './BudgetConfirm.css';
@@ -6,7 +6,9 @@ import './BudgetConfirm.css';
 const BudgetConfirm = () => {
   const [budgetList, setBudgetList] = useState([]);
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "budget"), (snapshot) => {
+    const collectionQueDown = query(collection(db, "budget"), orderBy("date", "desc")); //日付を降順で並び替え
+
+    const unsubscribe = onSnapshot(collectionQueDown, (snapshot) => {
       const budgetData = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
