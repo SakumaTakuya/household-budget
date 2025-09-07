@@ -5,7 +5,7 @@ import './Summary.css';
 
 const Summary = () => {
   const [totals, setTotals] = useState(0);
-  const income = 500000
+  const income = 500000 //ここは後日機能実装予定
 
   useEffect(() => {
     const getTotalMoney = () => {
