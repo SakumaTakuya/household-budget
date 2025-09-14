@@ -2,10 +2,13 @@ import { useState } from "react";
 import './BudgetForm.css';
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../Firebase";
+import useCategories from "../hooks/useCategories";
+import CategoryModal from "./CategoryModal";
+
 
 const BudgetForm = () => {
-  const expenseCategories = ["食費", "光熱費", "家賃", "交際費", "日用品費"]
-  const incomeCategories = ["給与", "ボーナス", "お小遣い"]
+  const { categories, newCategory, setNewCategory, addCategory } = useCategories();
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isIncome, setIsIncome] = useState(false);
   const [budget, setBudget] = useState({
     date: "",
@@ -32,7 +35,7 @@ const BudgetForm = () => {
       await addDoc(collection(db, "budget"), {
         ...budget,
         money: Number(budget.money),
-        type: isIncome ? "expense" : "income"
+        type: isIncome ? "income" : "expense"
       });
       alert("追加完了しました");
       setBudget({
@@ -45,6 +48,7 @@ const BudgetForm = () => {
       console.error(error);
     };
   };
+
 
   return (
     <div className="budget-form">
@@ -85,16 +89,29 @@ const BudgetForm = () => {
           onChange={handleBudget}
           id="category">
           <option value="">カテゴリーを選択してください</option>
-          {isIncome
-            ? expenseCategories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))
-            :
-            incomeCategories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
+          {categories
+            .filter((cat) => cat.type === (isIncome ? "income" : "expense"))
+            .map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
             ))
           }
         </select>
+
+        <button onClick={() => setIsModalOpen(true)}>カテゴリを追加</button>
+
+        {isModalOpen && (
+          <CategoryModal
+            newCategory={newCategory}
+            setNewCategory={setNewCategory}
+            addCategory={() => addCategory(
+              isIncome, () => setIsModalOpen(false)
+            )}
+            onClose={() => setIsModalOpen(false)}
+            isIncome={isIncome}
+          />
+        )}
       </div>
       <div>
         <label htmlFor="memo">メモ</label>
