@@ -4,6 +4,9 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../Firebase";
 
 const BudgetForm = () => {
+  const expenseCategories = ["食費", "光熱費", "家賃", "交際費", "日用品費"]
+  const incomeCategories = ["給与", "ボーナス", "お小遣い"]
+  const [isIncome, setIsIncome] = useState(false);
   const [budget, setBudget] = useState({
     date: "",
     money: "",
@@ -20,13 +23,16 @@ const BudgetForm = () => {
     if (
       (budget.date) === "" ||
       (budget.money) === "" ||
-      (budget.category) === "" ||
-      (budget.memo) === ""
-    ) { alert("入力してください"); return }
+      (budget.memo) === "" ||
+      (budget.category) === ""
+    ) {
+      alert("入力してください"); return
+    }
     try {
       await addDoc(collection(db, "budget"), {
         ...budget,
         money: Number(budget.money),
+        type: isIncome ? "expense" : "income"
       });
       alert("追加完了しました");
       setBudget({
@@ -42,6 +48,15 @@ const BudgetForm = () => {
 
   return (
     <div className="budget-form">
+      <div className="toggle-container">
+        <label className="toggle-button-4">
+          <input
+            type="checkbox"
+            checked={isIncome}
+            onChange={(e) => setIsIncome(e.target.checked)}
+          />
+        </label>
+      </div>
       <div className="date-form">
         <label htmlFor="date">日付</label>
         <input
@@ -70,11 +85,15 @@ const BudgetForm = () => {
           onChange={handleBudget}
           id="category">
           <option value="">カテゴリーを選択してください</option>
-          <option value="食費">食費</option>
-          <option value="光熱費">光熱費</option>
-          <option value="家賃">家賃</option>
-          <option value="交際費">交際費</option>
-          <option value="日用品費">日用品費</option>
+          {isIncome
+            ? expenseCategories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))
+            :
+            incomeCategories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))
+          }
         </select>
       </div>
       <div>
