@@ -32,7 +32,7 @@ const BudgetForm = () => {
       await addDoc(collection(db, "budget"), {
         ...budget,
         money: Number(budget.money),
-        type: isIncome ? "income" : "expense"
+        type: isIncome ? "expense" : "income"
       });
       alert("追加完了しました");
       setBudget({

@@ -4,25 +4,31 @@ import { db } from "../Firebase";
 import './Summary.css';
 
 const Summary = () => {
-  const [totals, setTotals] = useState(0);
-  const income = 500000 //ここは後日機能実装予定
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
 
   useEffect(() => {
-    const getTotalMoney = () => {
-      const unsubscribe = onSnapshot(collection(db, "budget"), (snapshot) => {
-        const data = snapshot.docs.map(doc => doc.data());
-        const computed = data.reduce((acc, budget) => {
-          const money = budget.money;
-          acc = acc + money;
+    const unsubscribe = onSnapshot(collection(db, "budget"), (snapshot) => {
+      const data = snapshot.docs.map(doc => doc.data());
+      const computed = data.reduce(
+        (acc, budget) => {
+          if (budget.type === "income") {
+            acc.income += budget.money;
+          }
+          else if (budget.type === "expense") {
+            acc.expense += budget.money
+          }
           return acc;
-        }, 0);
-        setTotals(computed);
-      });
-      return () => unsubscribe();
-    };
-    getTotalMoney()
+        },
+        { income: 0, expense: 0 }
+      );
+
+      setIncome(computed.income);
+      setExpense(computed.expense)
+    });
+    return () => unsubscribe();
   }, [])
-  const balance = income - totals;
+  const balance = income - expense;
 
 
   return (
@@ -33,7 +39,7 @@ const Summary = () => {
       </span>
       <span>
         <p>支出</p>
-        <p className="expense">￥{totals}</p>
+        <p className="expense">￥{expense}</p>
       </span>
       <span>
         <p>残高</p>
