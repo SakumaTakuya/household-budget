@@ -1,6 +1,7 @@
 import './App.css';
 import BudgetConfirm from "./components/BudgetConfirm";
 import BudgetForm from './components/BudgetForm';
+import Navigation from "./components/Navigation";
 import Summary from "./components/Summary";
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
       <Summary />
       <BudgetForm />
       <BudgetConfirm />
+
+      <Navigation />
     </div>
   );
 }
