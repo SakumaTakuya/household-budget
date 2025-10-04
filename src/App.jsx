@@ -1,20 +1,24 @@
+import { HashRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import BudgetConfirm from "./components/BudgetConfirm";
-import BudgetForm from './components/BudgetForm';
 import Navigation from "./components/Navigation";
-import Summary from "./components/Summary";
+import Home from "./pages/Home";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
-    <div className="App">
-      <h1>かんたん家計簿</h1>
-      <p>ここから開発スタート！</p>
-      <Summary />
-      <BudgetForm />
-      <BudgetConfirm />
+    <HashRouter>
+      <div className="App">
 
-      <Navigation />
-    </div>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </main>
+
+        <Navigation />
+      </div>
+    </HashRouter >
   );
 }
 
